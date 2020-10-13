@@ -1,3 +1,6 @@
-> 1%
-last 2 versions
-not dead
+# 设置需要转义的JavaScript特性和需要添加的css浏览器前缀
+# > 1%
+# last 2 versions
+# not dead
+Android >= 4.0
+iOS >= 8
