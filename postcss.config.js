@@ -1,7 +1,7 @@
 
 // postcss 配置文件
 module.exports = {
-  // plugins: {
+  plugins: {
   //   'autoprefixer': {
   //     browsers: ['Android >= 4.0', 'iOS >= 8']
   //   },
