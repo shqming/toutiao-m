@@ -1,6 +1,13 @@
 <template>
 	<div class="login-container">
 		<!-- topbar -->
+		<van-nav-bar
+		class="app-nav-bar"
+		title="注册 / 登录"
+		left-arrow
+		@click-left="$router.back()"
+		/>
+		
 		<!--
 			基于Vant的表单验证 和 element UI 类似
 			1. 使用van-form组件包裹所有得表单项 vant-field
@@ -14,14 +21,7 @@
 		@submit="onLogin" @failed="verufyFailed" :validate-first='true' 
 		:show-error='false' :show-error-message='false'
 		ref='login-form'
-		>
-			<van-nav-bar
-			class="app-nav-bar"
-			title="注册 / 登录"
-			left-arrow
-			@click-left="$router.back()"
-			/>
-				
+		>		
 			<!-- 登录注册表单 -->
 			<van-cell-group>
 			<van-field
@@ -104,6 +104,9 @@ export default {
 				}catch(e){
 					Toast.fail('存储错误！');
 				}
+				
+				//登录成功跳转回原来页面，这种方式不太好但先用这种方式,
+				this.$router.back();
 			} catch (err) {
 				console.log('登录失败',err);
 				Toast.fail('登录失败，手机号或密码错误！');

@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'LoginIndex',
+  name: 'QaIndex',
   components: {},
   props: {},
   data () {
