@@ -5,8 +5,6 @@
 			class="my-info"
 		>
 			<van-cell class="base-info"
-			title="单元格" 
-			value="内容" 
 			center 
 			:border="false"
 			>
@@ -19,7 +17,7 @@
 				</template>
 				
 				<div class="name"
-				slot="title">昵称</div>
+				slot="title">{{ currentUser.name }}</div>
 				
 				<van-button class="update-btn"
 				size="small" round
@@ -34,7 +32,7 @@
 				<van-grid-item class="data-info-item">
 					<div class="text-wrap"
 					slot="text">
-						<span class="count">18</span>
+						<span class="count">{{ currentUser.art_count }}</span>
 						<div class="text">头条</div>
 					</div>
 					
@@ -42,14 +40,14 @@
 				<van-grid-item class="data-info-item">
 					<div class="text-wrap"
 					slot="text">
-						<span class="count">66</span>
+						<span class="count">{{ currentUser.follow_count }}</span>
 						<div class="text">关注</div>
 					</div>
 				</van-grid-item>
 				<van-grid-item class="data-info-item">
 					<div class="text-wrap"
 					slot="text">
-						<span class="count">88</span>
+						<span class="count">{{ currentUser.fans_count }}</span>
 						<div class="text">粉丝</div>
 					</div>
 				</van-grid-item>
@@ -57,7 +55,7 @@
 					class="data-info-item">
 					<div class="text-wrap"
 					slot="text">
-						<span class="count">88</span>
+						<span class="count">{{ currentUser.like_count }}</span>
 						<div class="text">获赞</div>
 					</div>
 				</van-grid-item>
@@ -71,7 +69,7 @@
 		</div>
 		
 		
-		<van-grid v-if="user"
+		<van-grid
 			class="nav-grid mb-4"
 			:column-num="2"
 		>
@@ -88,6 +86,7 @@
 		</van-grid>
 		
 		<van-cell 
+			v-if="user"
 			class="van-cell-link"
 			title="消息通知" is-link to="/" 
 		/>
@@ -96,7 +95,8 @@
 			title="小智同学" is-link to="/" 
 		/>
 		<van-cell 
-			@click="user = false"
+			v-if="user"
+			@click="onLogout()"
 			class="logout-cell"
 			title="退出登录" 
 		/>
@@ -105,20 +105,52 @@
 
 
 <script>
+import { mapState } from 'vuex'	
+import { getCurrentUser } from '@/api/user.js'
+
+	
 export default {
   name: 'MyIndex',
   components: {},
   props: {},
   data () {
     return {
-			user: true,
+			currentUser: {}
 		}
   },
-  computed: {},
+  computed: {
+		...mapState(['user'])
+	},
   watch: {},
-  created () {},
+  created () {
+		this.loadCurrentUser();
+	},
   mounted () {},
-  methods: {}
+  methods: {
+		async loadCurrentUser () {
+			try{
+				const { data } = await getCurrentUser();
+				this.currentUser = data.data;
+			}catch(e){
+				//TODO handle the exception
+				console.log('用户未登录');
+			}
+		},
+		
+		onLogout() {
+			this.$dialog.confirm({
+			  title: '退出登录',
+			  message: '确认退出吗？',
+			})
+			  .then(() => {  //确认时调用
+			    this.$store.commit('setUser',null);
+			  })
+			  .catch(() => {	//取消时调用
+			    // on cancel
+			  });
+		},
+		
+	}
 }
 </script>
 
