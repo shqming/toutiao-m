@@ -19,7 +19,7 @@
 			标签页组件有个功能，只有第一次查看标签页时，
 			才会渲染里面的内容
 		 -->
-		<van-tabs>
+		<van-tabs swipeable>
 		  <van-tab 
 				v-for="channel in channels" 
 				:key="channel.id"
@@ -60,7 +60,7 @@ export default {
 		async loadChannels () {
 			//请求获取频道数据
 			const { data } = await getUserChannels();
-			console.log(data);
+			// console.log(data);
 			this.channels = data.data.channels;
 			
 		}
