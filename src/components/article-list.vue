@@ -12,7 +12,13 @@
 				finished-text="没有更多了"
 				@load="onLoad"
 			>
-				<van-cell v-for="article in articles" :key="article.art_id" :title="article.title" />
+				<article-item
+					v-for="(article, index) in articles"
+					:key="index"
+					:article="article"
+				/>
+
+				<!-- <van-cell v-for="article in articles" :key="article.art_id" :title="article.title" /> -->
 			</van-list>
 		</van-pull-refresh>
 	</div>
@@ -20,10 +26,13 @@
 
 <script>
 import { getArticles } from '@/api/article.js'
+import ArticleItem from '@/components/article-item/index.vue'
 	
 export default {
   name: 'ArticleList',
-  components: {},
+  components: {
+	  ArticleItem,
+  },
   props: {
 		channel: {
 			type: Object,
@@ -54,7 +63,7 @@ export default {
 				with_top: 1,
 			});
 			
-			console.log(data);
+			// console.log(data);
 			// 2. 把数据push到 list 数组中
 			const { results } = data.data
 			this.articles.push(...results);
