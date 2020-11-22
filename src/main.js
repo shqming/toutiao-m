@@ -15,6 +15,9 @@ import 'amfe-flexible'
 //加载全局样式
 import './styles/index.less'
 
+// 使用dayjs
+import './utils/dayjs.js'
+
 new Vue({
   router,
   store,

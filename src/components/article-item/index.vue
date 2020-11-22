@@ -1,6 +1,7 @@
 <template>
   <van-cell class="article-item">
-    <div slot="title" class="title van-multi-ellipsis--l3">{{ article.title+'dsadadasdasdasdasdasds' }}</div>
+    <div slot="title" class="title van-multi-ellipsis--l3">{{ article.title }}</div>
+    <!-- <div slot="title" class="title van-multi-ellipsis--l3">年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒</div> -->
     <div slot="label">
       <div 
         class="cover-wrap" 
@@ -22,7 +23,7 @@
       <div class="label-wrap">
         <span>{{ article.aut_name }}</span>
         <span>{{ article.collect_count }}</span>
-        <span>{{ article.pubdate }}</span>
+        <span>{{ article.pubdate | relativeTime }}</span>
       </div>
       
     </div>
@@ -65,12 +66,11 @@
       font-size: 16px;
       color: #3a3a3a;
     }
-    .van-cell__value{
-      flex: 1;
+    /deep/.van-cell__value{
+      flex: unset;
       width: 116px;
       height: 73px;
       margin-left: 12px;
-
       .right-cover{
         width: 116px; 
         height: 73px;
@@ -79,8 +79,8 @@
     .cover-wrap {
       padding: 15px 0;
       display: flex;
-      /deep/.cover-wrap-item {
-        flex: unset;
+      .cover-wrap-item {
+        flex: 1;
         height: 73px;
         &:not(:last-child) {
           padding-right: 4px;
@@ -89,8 +89,15 @@
           width: 100%;
           height: 73px;
         }
-
       }
+    }
+
+    .label-wrap {
+      font-size: 11px;
+      color: #b4b4b4;
+    }
+    .label-wrap span {
+      margin-right: 12px;
     }
     
   }
