@@ -20,6 +20,12 @@
 				<article-list :channel="channel" />
 			</van-tab>
 
+			<!-- 汉堡按钮定位把列表最后的位置给挡住了，解决办法的就是在这里添加一个占位符 -->
+			<div 
+				slot="nav-right" 
+				class="wap-nav-placeholder"
+			></div>
+
 			<div 
 				slot="nav-right" 
 				@click="isChannelEditShow = true"
@@ -114,6 +120,12 @@
 				background-color: #3296fa;
 				margin-bottom: 4px;
 			}
+			.wap-nav-placeholder{
+				height: 44px;
+				flex-basis: 33px;
+				flex-shrink: 0;
+			}
+
 			.wap-nav-wrap {
 				width: 33px;
 				height: 44px;
