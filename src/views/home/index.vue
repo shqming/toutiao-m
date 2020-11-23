@@ -19,8 +19,24 @@
 			>
 				<article-list :channel="channel" />
 			</van-tab>
-		</van-tabs>
 
+			<div 
+				slot="nav-right" 
+				@click="isChannelEditShow = true"
+				class="wap-nav-wrap"
+			>
+				<van-icon name="wap-nav" />
+			</div>
+		</van-tabs>
+		<van-popup 
+			v-model="isChannelEditShow" 
+			position="bottom"
+			closeable
+			class="channel-edit-popup"
+			close-icon-position="top-left"
+			get-container="body"
+			style="height: 100%"
+		/>
 	</div>
 </template>
 
@@ -42,6 +58,7 @@
 			return {
 				active: 0,
 				channels: [],
+				isChannelEditShow: false,
 			}
 		},
 		computed: {},
@@ -97,6 +114,28 @@
 				background-color: #3296fa;
 				margin-bottom: 4px;
 			}
+			.wap-nav-wrap {
+				width: 33px;
+				height: 44px;
+				background-color: #fff;
+				opacity: .9;
+				position: fixed;
+				right: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				&::before {
+					content: "";
+					width: 1px;
+					height: 100%;
+					background-image: linear-gradient(to bottom, #fff 0%, rgb(133, 131, 131) 50%, #fff 100%);
+					position: absolute;
+					left: 0;
+				}
+				
+			}
+
 		}
+
 	}
 </style>
