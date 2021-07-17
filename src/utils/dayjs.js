@@ -14,7 +14,7 @@ dayjs.extend(relativeTime);
 
 
 //例子
-console.log(dayjs().to(dayjs('2020-05-13')))
+// console.log(dayjs().to(dayjs('2020-05-13')))
 Vue.filter('relativeTime', function(val){
     return dayjs(val).from(dayjs());
 })

@@ -3,7 +3,14 @@
 
 		<!-- 搜索栏 -->
 		<van-nav-bar class="app-nav-bar">
-			<van-button class="search-btn" slot="title" type="info" round icon="search">搜索</van-button>
+			<van-button 
+				class="search-btn" 
+				slot="title" 
+				type="info" 
+				round 
+				icon="search"
+				to="/search"
+			>搜索</van-button>
 		</van-nav-bar>
 
 		<!-- 导航栏-文章频道列表 -->
@@ -42,15 +49,23 @@
 			close-icon-position="top-left"
 			get-container="body"
 			style="height: 100%"
-		/>
+		>
+			<channel-edit
+        :user-channels="channels"
+        :active="active"
+        @close="isChannelEditShow = false"
+        @update-active="active = $event"
+      />
+		</van-popup>
 	</div>
 </template>
 
 <script>
-	import {
-		getUserChannels
-	} from '@/api/user.js'
-	import ArticleList from '@/components/article-list.vue'
+import {
+	getUserChannels
+} from '@/api/user.js'
+import ArticleList from './components/article-list.vue'
+import ChannelEdit from './components/channel-edit.vue'
 
 
 
@@ -58,13 +73,14 @@
 		name: 'HomeIndex',
 		components: {
 			ArticleList,
+			ChannelEdit,
 		},
 		props: {},
 		data() {
 			return {
 				active: 0,
 				channels: [],
-				isChannelEditShow: false,
+				isChannelEditShow: false,	//控制编辑频道的显示状态
 			}
 		},
 		computed: {},

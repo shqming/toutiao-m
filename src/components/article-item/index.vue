@@ -1,7 +1,15 @@
 <template>
-  <van-cell class="article-item">
+  <van-cell
+    class="article-item"
+    :to="{
+      name: 'article',
+      params: {
+        articleId: article.art_id
+      }
+    }"
+  >
     <div slot="title" class="title van-multi-ellipsis--l3">{{ article.title }}</div>
-    <!-- <div slot="title" class="title van-multi-ellipsis--l3">年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒年十大萨达打撒打撒打撒</div> -->
+
     <div slot="label">
       <div 
         class="cover-wrap" 
@@ -22,7 +30,7 @@
 
       <div class="label-wrap">
         <span>{{ article.aut_name }}</span>
-        <span>{{ article.collect_count }}</span>
+        <span>{{ article.collect_count }}评论</span>
         <span>{{ article.pubdate | relativeTime }}</span>
       </div>
       
